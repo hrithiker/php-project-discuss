@@ -159,7 +159,7 @@ if (isset($_POST['login'])) {
     $query = $conn->prepare("delete from questions where id =$qid");
     $result = $query->execute();
     if ($result) {
-        header("location: /discuss");
+        header("Location: /discuss-project/index.php");
     } else {
         echo "Question not deleted";
     }
