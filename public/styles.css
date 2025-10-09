@@ -3,10 +3,10 @@
  height: auto;  
 }
 a{
-    color: skyblue !important;
+    color: #1c7194 !important;
 }
 .heading{
-    font-size: 2.75rem;
+    font-size: 3 rem;
     /* font-weight: bold; */
     margin-bottom: 40px;
     text-align: center;
