@@ -1,0 +1,10 @@
+chatapphr.free.nf
+
+user name: if0_40127499
+
+acc pass: 4QV1H2JeK6Ej
+
+
+
+MySQL DB Name	MySQL User Name	MySQL Password	MySQL Host Name	PHPMyAdmin
+if0_40127499_discuss_db	if0_40127499	(Your vPanel Password)	sql210.infinityfree.com

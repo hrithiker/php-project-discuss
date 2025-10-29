@@ -9,7 +9,7 @@ $userId = $user['user_id'] ?? null;
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container   ">
+    <div class="container">
         <a class="navbar-brand" href="./">
             <img src="./public/discuss.webp" alt="iso">
         </a>
@@ -20,14 +20,15 @@ $userId = $user['user_id'] ?? null;
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <!-- Added me-auto to push search form to right -->
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./">Home</a>
                 </li>
 
                 <?php if ($username): ?>
                     <li class="nav-item">
-                        <a class="nav-link " href="./server/requests.php?logout=true">
+                        <a class="nav-link" href="./server/requests.php?logout=true">
                             Logout (<?php echo ucfirst(htmlspecialchars($username)); ?>)
                         </a>
                     </li>
@@ -41,19 +42,21 @@ $userId = $user['user_id'] ?? null;
                     <li class="nav-item">
                         <a class="nav-link" href="?signup=true">SignUp</a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" href="?login=true">Login</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?login=true">Login</a>
                     </li>
-
                 <?php endif; ?>
 
                 <li class="nav-item">
                     <a class="nav-link" href="?latest=true">Latest Questions</a>
                 </li>
             </ul>
+
+            <!-- Moved search form inside collapse and added mobile styling -->
+            <form class="d-flex mt-3 mt-lg-0" action="">
+                <input class="form-control me-2" name="search" type="search" placeholder="Search questions">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
-        <form class="d-flex" action="">
-            <input class="form-control me-2" name="search" type="search" placeholder="Search questions">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
     </div>
 </nav>

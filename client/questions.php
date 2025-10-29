@@ -11,8 +11,8 @@
         ?>
     </h4>
 
-    <div>
-        <div class="col-8">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
             <?php
             include("./common/db.php");
 
@@ -32,15 +32,19 @@
             foreach ($result as $row) {
                 $title = htmlspecialchars($row['title']);
                 $id = (int)$row['id'];
-                echo "<div class='row question-list mb-3'>
-                <h4 class='my-question'>
-                    <a href='?q-id=$id'>$title</a>";
+                echo "<div class='question-list mb-3 p-3'>
+                        <div class='d-flex justify-content-between align-items-center'>
+                            <h5 class='mb-0 flex-grow-1 me-3'>
+                                <a href='?q-id=$id' class='text-decoration-none'>$title</a>
+                            </h5>";
 
                 if (isset($_GET["u-id"])) {
-                    echo " <a href='./server/requests.php?delete=$id' class='delete-link ms-3'>Delete</a>";
+                    echo "<div class='flex-shrink-0'>
+                            <a href='./server/requests.php?delete=$id' class='delete-link btn btn-outline-danger btn-sm'>Delete</a>
+                          </div>";
                 }
 
-                echo "</h4></div>";
+                echo "</div></div>";
             }
             ?>
         </div>

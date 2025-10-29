@@ -11,7 +11,6 @@
 <body>
     <?php
     session_start();
-    include('./client/commonFiles.php');
     include('./client/header.php');
 
     $user = $_SESSION['user'] ?? null;
@@ -28,30 +27,42 @@
         // Only allow logged-in users to view question details
         $qid = $_GET['q-id'];
         include('./client/questiondetail.php');
-    } else if (isset($_GET['u-id'])) {
-        $uid = $_SESSION['user']['user_id'];;
+    } elseif (isset($_GET['u-id'])) {
+        $uid = $_SESSION['user']['user_id'];
         include('./client/questions.php');
-    } else if (isset($_GET['latest'])) {
+    } elseif (isset($_GET['latest'])) {
         include('./client/questions.php');
-    } else if (isset($_GET['search'])) {
-        $search  = $_GET['search'];
+    } elseif (isset($_GET['search'])) {
+        $search = $_GET['search'];
         include('./client/questions.php');
     } else {
         include('./client/questions.php');
     }
-    //  else {
-    //     if ($username) {
-    //         // echo "Here are some of the latest questions:";
-    //         include('./client/questions.php');
-    //         // echo "<h3>HI! Welcome back, <span class='text-primary'>" . ucfirst(htmlspecialchars($username)) . "</span> 👋</h3>";
 
-
-    //     } else {
-    //         echo "<h2> HI! Welcome to Discuss HOMEPAGE  👋</h2>";
-    //     }
-    //     echo '</div>';
-    // }
+    include('./client/footer.php');
     ?>
+
+    <!-- ✅ Bootstrap JS Bundle (includes Popper) -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- ✅ Optional helper to close dropdown/collapse after clicking a link -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.navbar-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                        new bootstrap.Collapse(navbarCollapse, {
+                            toggle: true
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 
