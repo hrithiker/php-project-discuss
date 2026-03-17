@@ -7,7 +7,7 @@ if0_40127499_discuss_db	if0_40127499	(Your vPanel Password)	sql210.infinityfree.
 
 | Field               | Value                     |
 | ------------------- | ------------------------- |
-| **MySQL DB Name**   | `if0_41269092_discuss_db` |
+| **MySQL DB Name**   | `if0_41269092_discuss` |
 | **MySQL User Name** | `if0_41269092`            |
 | **MySQL Password**  | **Your vPanel Password**  |
 | **MySQL Host Name** | `sql309.infinityfree.com` |
