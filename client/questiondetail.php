@@ -1,19 +1,25 @@
 <div class="container mt-4">
 
-    <!-- 🧾 Heading -->
+    <!-- ======================= -->
+    <!-- 🧾 HEADING -->
+    <!-- ======================= -->
     <h4 class="text-secondary fw-semibold border-bottom pb-2 mb-4">
         Question
     </h4>
 
     <div class="row">
 
-        <!-- 🧠 Main Content -->
+        <!-- ======================= -->
+        <!-- 🧠 MAIN CONTENT -->
+        <!-- ======================= -->
         <div class="col-12 col-lg-8">
 
             <?php
-            include("./common/db.php");
+            // ❌ DB include removed (already in index.php)
 
-            // ✅ Safer query
+            // =======================
+            // 📌 FETCH QUESTION
+            // =======================
             $stmt = $conn->prepare("SELECT * FROM questions WHERE id = ?");
             $stmt->bind_param("i", $qid);
             $stmt->execute();
@@ -21,7 +27,9 @@
             $row = $result->fetch_assoc();
             ?>
 
-            <!-- 📌 Question Card -->
+            <!-- ======================= -->
+            <!-- 📌 QUESTION CARD -->
+            <!-- ======================= -->
             <div class="mb-2 p-3 border rounded bg-light">
                 <h5 class="fw-bold mb-2">
                     <?= htmlspecialchars($row['title']) ?>
@@ -31,15 +39,20 @@
                 </p>
             </div>
 
-            <!-- 💬 Answers Section -->
+            <!-- ======================= -->
+            <!-- 💬 ANSWERS -->
+            <!-- ======================= -->
             <?php include("./client/answers.php"); ?>
 
-            <!-- ✍️ Answer Box -->
+            <!-- ======================= -->
+            <!-- ✍️ ANSWER FORM -->
+            <!-- ======================= -->
             <div class="mt-2">
 
                 <?php if (isset($_SESSION['user'])): ?>
 
                     <form action="./server/requests.php" method="post">
+
                         <input type="hidden" name="question_id" value="<?= $qid ?>">
 
                         <textarea
@@ -49,14 +62,14 @@
                             rows="4"
                             required></textarea>
 
-                        <button type="submit" name="answer" class="btn btn-primary px-4">
+                        <button type="submit" name="submit_answer" class="btn btn-primary px-4">
                             Submit Answer
                         </button>
+
                     </form>
 
                 <?php else: ?>
 
-                    <!-- 🔒 Login Required -->
                     <a href="?login=true" class="btn btn-primary text-white text-decoration-none px-4">
                         Write Answer
                     </a>
@@ -71,12 +84,13 @@
 
         </div>
 
-        <!-- 📂 Sidebar -->
+        <!-- ======================= -->
+        <!-- 📂 SIDEBAR -->
+        <!-- ======================= -->
         <div class="col-12 col-lg-4 mt-4 mt-lg-0">
 
             <div class="p-3 border rounded bg-white shadow-sm">
 
-                <!-- 🔹 Title -->
                 <h6 class="fw-semibold mb-3 text-secondary border-bottom pb-2">
                     Related Questions
                 </h6>
@@ -87,12 +101,12 @@
 
                 foreach ($relatedResult as $r) {
                     echo "
-                 <a href='?q-id={$r['id']}' 
-                      class ='d-block px-2 py-2 rounded text-decoration-none text-dark related-link'>
+                    <a href='?q-id={$r['id']}' 
+                       class='d-block px-2 py-2 rounded text-decoration-none text-dark related-link'>
 
-                      <span class='me-2 text-primary fw-bold' style='font-size: 1.2rem;'>●</span>
-                      " . htmlspecialchars($r['title']) . "
-                     </a>";
+                        <span class='me-2 text-primary fw-bold' style='font-size: 1.2rem;'>●</span>
+                        " . htmlspecialchars($r['title']) . "
+                    </a>";
                 }
                 ?>
 

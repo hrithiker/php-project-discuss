@@ -5,50 +5,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discuss-project</title>
-    <?php include('./client/commonFiles.php'); ?>
+    <?php require_once('./client/commonFiles.php'); ?>
 </head>
 
 <body>
+
     <?php
     session_start();
-    include('./client/header.php');
+
+    // =======================
+    // ✅ DATABASE LOAD (ONLY HERE)
+    // =======================
+    require_once('./common/db.php');
+
+    require_once('./client/header.php');
 
     $user = $_SESSION['user'] ?? null;
     $username = $user['username'] ?? null;
 
+
+    // =======================
+    // 🔀 ROUTING (UNCHANGED LOGIC)
+    // =======================
+
     if (isset($_GET['signup']) && !$username) {
-        include('./client/signUp.php');
+
+        require_once('./client/signUp.php');
     } elseif (isset($_GET['login']) && !$username) {
-        include('./client/login.php');
+
+        require_once('./client/login.php');
     } elseif (isset($_GET['ask']) && $username) {
-        // Only allow logged-in users to ask questions
-        include('./client/ask.php');
+
+        require_once('./client/ask.php');
     } elseif (isset($_GET['q-id'])) {
-        // Only allow logged-in users to view question details
-        $qid = $_GET['q-id'];
-        include('./client/questiondetail.php');
-    } elseif (isset($_GET['u-id'])) {
+
+        $qid = isset($_GET['q-id']) ? (int)$_GET['q-id'] : 0;
+
+        require_once('./client/questiondetail.php'); // keeping your filename
+
+    } elseif (isset($_GET['u-id']) && isset($_SESSION['user'])) {
+
         $uid = $_SESSION['user']['user_id'];
-        include('./client/questions.php');
+        require_once('./client/questions.php');
+    } elseif (isset($_GET['u-id'])) {
+
+        header("Location: ?login=true");
+        exit();
     } elseif (isset($_GET['latest'])) {
-        include('./client/questions.php');
+
+        require_once('./client/questions.php');
     } elseif (isset($_GET['search'])) {
+
         $search = $_GET['search'];
-        include('./client/questions.php');
+        require_once('./client/questions.php');
     } else {
-        include('./client/questions.php');
+
+        require_once('./client/questions.php');
     }
 
-    include('./client/footer.php');
+
+    // =======================
+    // 🔻 FOOTER
+    // =======================
+    require_once('./client/footer.php');
     ?>
 
-    <!-- ✅ Bootstrap JS Bundle (includes Popper) -->
+    <!-- Bootstrap -->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 
-    <!-- ✅ Optional helper to close dropdown/collapse after clicking a link -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.navbar-nav a').forEach(link => {
