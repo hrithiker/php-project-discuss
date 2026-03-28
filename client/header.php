@@ -1,4 +1,21 @@
 <?php
+function getAvatarColor($name) {
+$colors = [
+'#0d6efd', // blue
+'#198754', // green
+'#dc3545', // red
+'#ffc107', // yellow
+'#6f42c1', // purple
+'#20c997', // teal
+'#fd7e14', // orange
+];
+
+$index = ord(strtoupper($name[0])) % count($colors);
+return $colors[$index];
+}
+?>
+
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -64,9 +81,14 @@ $userId = $user['user_id'] ?? null;
             <?php if ($username): ?>
                 <div class="d-flex align-items-center mt-3 mt-lg-0">
 
-                    <?php $firstLetter = strtoupper(substr($username, 0, 1)); ?>
+                    <?php
+                    $firstLetter = strtoupper(substr($username, 0, 1));
+                    $bgColor = getAvatarColor($username);
+                    ?>
 
-                    <div class="nav-avatar me-2"><?php echo $firstLetter; ?></div>
+                    <div class="nav-avatar me-2" style="background-color: <?= $bgColor ?>;">
+                        <?= $firstLetter ?>
+                    </div>
 
                     <a href="./server/requests.php?logout=true" class="btn btn-sm btn-outline-danger">
                         Logout

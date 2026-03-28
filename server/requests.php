@@ -122,6 +122,12 @@ if (isset($_POST['login'])) {
 
     $stmt->close();
 } else if (isset($_POST["ask"])) {
+
+    if (!isset($_SESSION['user'])) {
+        http_response_code(403);
+        exit("Login required");
+    }
+
     $title = $_POST['title'];
     $description = $_POST['description'];
     // $category_id = $_POST['category'];
@@ -139,6 +145,13 @@ if (isset($_POST['login'])) {
         echo "Question is added to website";
     }
 } else if (isset($_POST["answer"])) {
+
+    // 🔐 Check login FIRST
+    if (!isset($_SESSION['user'])) {
+        http_response_code(403);
+        exit("Login required");
+    }
+
     $answer = $_POST['answer'];
     $question_id = $_POST['question_id'];
     $user_id = $_SESSION['user']['user_id'];
