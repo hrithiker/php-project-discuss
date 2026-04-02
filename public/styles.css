@@ -49,22 +49,102 @@ a {
   z-index: 1010;
 }
 
-/* Search */
-.search-box {
-  border-radius: 20px;
-  padding-left: 12px;
+/* Smooth hover feel */
+.navbar .btn {
+  transition: all 0.2s ease;
+}
+
+.navbar .btn:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================
+   🔍 SEARCH (INSIDE BUTTON)
+========================= */
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+}
+
+.search-wrapper .search-box {
+  width: 100%;
+  border-radius: 25px;
+  padding: 8px 40px 8px 12px; /* space for button */
+  border: 1px solid #ddd;
+}
+
+/* Button inside input */
+.search-wrapper .search-btn {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.search-wrapper .search-btn:hover {
+  background: #1d4ed8;
+}
+@media (max-width: 991.98px) {
+  .search-wrapper {
+    max-width: 100%;
+  }
 }
 
 /* Avatar */
 .nav-avatar {
   width: 35px;
   height: 35px;
+  min-width: 35px;
+  min-height: 35px;
   border-radius: 50%;
   color: white;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+/* =========================
+   👤 USER CONTROLS
+========================= */
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logout button clean look */
+.user-controls .btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 20px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.user-controls .btn:hover {
+  transform: translateY(-1px);
+}
+@media (max-width: 991.98px) {
+  .user-controls {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
 }
 
 /* ========================================

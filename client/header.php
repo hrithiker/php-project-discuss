@@ -1,17 +1,18 @@
 <?php
-function getAvatarColor($name) {
-$colors = [
-'#0d6efd', // blue
-'#198754', // green
-'#dc3545', // red
-'#ffc107', // yellow
-'#6f42c1', // purple
-'#20c997', // teal
-'#fd7e14', // orange
-];
+function getAvatarColor($name)
+{
+    $colors = [
+        '#0d6efd', // blue
+        '#198754', // green
+        '#dc3545', // red
+        '#ffc107', // yellow
+        '#6f42c1', // purple
+        '#20c997', // teal
+        '#fd7e14', // orange
+    ];
 
-$index = ord(strtoupper($name[0])) % count($colors);
-return $colors[$index];
+    $index = ord(strtoupper($name[0])) % count($colors);
+    return $colors[$index];
 }
 ?>
 
@@ -72,15 +73,18 @@ $userId = $user['user_id'] ?? null;
             </ul>
 
             <!-- Search -->
-            <form class="d-flex me-3 mt-3 mt-lg-0" action="">
+            <!-- <form class="d-flex me-3 mt-3 mt-lg-0" action="">
                 <input class="form-control search-box me-2" name="search" type="search" placeholder="Search...">
                 <button class="btn btn-primary" type="submit">Search</button>
+            </form> -->
+            <form class="search-wrapper me-3 mt-3 mt-lg-0" action="">
+                <input class="form-control search-box" name="search" type="search" placeholder="Search...">
+                <button class="search-btn" type="submit">🔍</button>
             </form>
 
             <!-- User badge / logout -->
             <?php if ($username): ?>
-                <div class="d-flex align-items-center mt-3 mt-lg-0">
-
+                <div class="user-controls mt-3 mt-lg-0">
                     <?php
                     $firstLetter = strtoupper(substr($username, 0, 1));
                     $bgColor = getAvatarColor($username);
